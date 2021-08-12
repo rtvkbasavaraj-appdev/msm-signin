@@ -1,40 +1,28 @@
 <div>
   <div>
     <h1>
-      List of all bookmarks
+      <%= User.where({:id => session.fetch(:user_id)}).first.first_name%> <%= User.where({:id => session.fetch(:user_id)}).first.last_name%>'s bookmarks
     </h1>
   </div>
 </div>
 
-<hr>
-
 <div>
   <div>
-    <h2>
-      Add a new bookmark
-    </h2>
-
     <form action="/insert_bookmark" method="post">
-      <div>
-        <label for="user_id_box">
-          User
-        </label>
-
-        <input type="text" id="user_id_box" name="query_user_id">
-      </div>
 
       <div>
-        <label for="movie_id_box">
-          Movie
-        </label>
-
-        <input type="text" id="movie_id_box" name="query_movie_id">
-      </div>
+        <select id="movie_id_box" name="query_movie_id">
+          <% Movie.all.each do |a_movie| %>
+            <option value = <%= a_movie.id %>> <%= a_movie.title %> </option>
+          <% end %>
+        </select>
+      
 
       <button>
-        Create bookmark
+        Bookmark this movie!
       </button>
     </form>
+    </div>
   </div>
 </div>
 
@@ -98,5 +86,3 @@
     </table>
   </div>
 </div>
-
-<hr>
