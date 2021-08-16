@@ -9,14 +9,27 @@
         <a href="/movies">
           Go back
         </a>
-      </div>
 
-      <div>
         <a href="/delete_movie/<%= @the_movie.id %>">
           Delete movie
         </a>
       </div>
     </div>
+    <hr>
+
+    <% if session.fetch(:user_id) != nil %>
+      <% if Bookmark.where({:movie_id => @the_movie.id}).first == nil %>
+        <form action="/insert_bookmark" method="post">
+          <input id="movie_id_box" type="hidden" name="query_movie_id" value="<%= @the_movie.id %>">
+          
+            <button>
+              Bookmark this movie!
+            </button>
+        </form>
+      <% else %>
+        <a href = "/delete_bookmark/<%= Bookmark.where({:movie_id => @the_movie.id}).first.id %>">Un-bookmark</a>
+      <% end %>
+    <% end %>
 
     <dl>
       <dt>

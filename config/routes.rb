@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   get("/", { :controller => "user_authentication", :action => "homepage"})
-  # Routes for the Bookmark resource:
+  # Routes for the Bookmark resource: 
 
   # CREATE
   post("/insert_bookmark", { :controller => "bookmarks", :action => "create" })
